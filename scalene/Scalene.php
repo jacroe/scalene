@@ -37,8 +37,8 @@ class Scalene
 	public function loadFromConfig()
 	{
 		if (array_key_exists("load", $this->config))
-			foreach($this->config["load"]["core"] as $core)
-				$this->load->core($core);
+			foreach($this->config["load"] as $type => $class)
+				$this->load->$type($class);
 	}
 
 	public function timeSinceStart()
