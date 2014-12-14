@@ -29,7 +29,11 @@ class Database extends Core
 
 	public function numRows($table, $where = 1)
 	{
-		return count($this->get($table, $where));
+		$query = "SELECT COUNT(*) AS count FROM `$table` WHERE $where";
+		$stmt = $this->con->prepare($query);
+		$stmt->execute();
+		$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $row[0]["count"];
 	}
 
 	public function insert($table, $array)
