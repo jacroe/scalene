@@ -37,6 +37,13 @@ class Load
 		$this->parent->$lib = new $libU();
 	}
 
+	public function controller($controller)
+	{
+		$controllerU = ucfirst($controller);
+		require_once DATA_PATH."controllers/{$controllerU}_controller.php";
+		
+	}
+
 	public function model($model)
 	{
 		if (is_array($model))
