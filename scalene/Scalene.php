@@ -23,6 +23,7 @@ class Scalene
 		require SCALENE_PATH."Load.php";
 		require SCALENE_PATH."View.php";
 		require SCALENE_PATH."Base.php";
+		require SCALENE_PATH."Router.php";
 
 		$this->config = $config;
 		$this->timestart = microtime(true);
@@ -32,6 +33,7 @@ class Scalene
 		$this->load = new Load($this);
 		$this->view = new View($this);
 		$this->model = new StdClass;
+		$this->router = new Router($this);
 	}
 
 	public function loadFromConfig()

@@ -2,6 +2,43 @@
 
 class Router
 {
+	private $parent;
+
+	public function __construct(&$parent)
+	{
+		$this->parent = $parent;
+	}
+
+	public function route()
+	{
+		$uri = $this->_parse_request_uri();
+		$uri = explode("/", $uri);
+		$controller = array_splice($uri, 0, 1-count($uri))[0];
+
+		if (empty($controller))
+		{
+			$controller = is_null($uri[0]) ? $uri[0] : "news";
+			$method = "index";
+			$params = array();
+		}
+		else
+		{
+			if (count($uri) > 1)
+			{
+				$method = array_splice($uri, 0, 1-count($uri))[0];
+				$params = $uri;
+			}
+			else
+			{
+				$method = $uri[0];
+				$params = array();
+			}
+		}
+
+		$this->parent->load->controller($controller);
+		if (!call_user_func_array(array($this->parent->$controller, $method), $params))
+			echo "500";
+	}
 
 	/*
 		From CodeIgniter's URL class

@@ -41,6 +41,8 @@ class Load
 	{
 		$controllerU = ucfirst($controller);
 		require_once DATA_PATH."controllers/{$controllerU}_controller.php";
+
+		$this->parent->$controller = new $controllerU();
 		
 	}
 

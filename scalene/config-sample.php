@@ -1,4 +1,7 @@
 <?php
+
+$config["default_controller"] = "welcome";
+
 $config["load"]["core"][] = "database";
 $config["load"]["core"][] = "email";
 
