@@ -3,10 +3,12 @@
 class Router
 {
 	private $parent;
+	private $default_controller;
 
 	public function __construct(&$parent)
 	{
 		$this->parent = $parent;
+		$this->default_controller = $this->parent->config["default_controller"];
 	}
 
 	public function route()
@@ -17,7 +19,7 @@ class Router
 
 		if (empty($controller))
 		{
-			$controller = is_null($uri[0]) ? $uri[0] : "news";
+			$controller = !is_null($uri[0]) ? $uri[0] : $this->default_controller;
 			$method = "index";
 			$params = array();
 		}
@@ -35,9 +37,21 @@ class Router
 			}
 		}
 
-		$this->parent->load->controller($controller);
-		if (!call_user_func_array(array($this->parent->$controller, $method), $params))
-			echo "500";
+		if ($this->parent->load->controller($controller))
+		{
+			if (!method_exists($this->parent->controller, $method))
+			{
+				if (call_user_func_array(array($this->parent->$controller, $method), $params) === FALSE)
+					echo "500";
+			}
+			else
+			{
+				echo "404";
+			}
+		}
+		else
+			echo "404";
+		
 	}
 
 	/*

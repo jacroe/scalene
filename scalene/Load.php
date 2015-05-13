@@ -18,9 +18,15 @@ class Load
 			return;
 		}
 		$coreU = ucfirst($core);
-		require_once SCALENE_PATH."core/{$coreU}_core.php";
 
-		$this->parent->$core = new $coreU();
+		if (file_exists(SCALENE_PATH."core/{$coreU}_core.php"))
+		{
+			require_once SCALENE_PATH."core/{$coreU}_core.php";
+			$this->parent->$core = new $coreU();
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public function library($lib)
@@ -32,17 +38,29 @@ class Load
 			return;
 		}
 		$libU = ucfirst($lib);
-		require_once SCALENE_PATH."lib/{$libU}_lib.php";
 
-		$this->parent->$lib = new $libU();
+		if (file_exists(SCALENE_PATH."lib/{$libU}_lib.php"))
+		{
+			require_once SCALENE_PATH."lib/{$libU}_lib.php";
+			$this->parent->$lib = new $libU();
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public function controller($controller)
 	{
 		$controllerU = ucfirst($controller);
-		require_once DATA_PATH."controllers/{$controllerU}_controller.php";
-
-		$this->parent->$controller = new $controllerU();
+		
+		if (file_exists(DATA_PATH."controllers/{$controllerU}_controller.php"))
+		{
+			require_once DATA_PATH."controllers/{$controllerU}_controller.php";
+			$this->parent->$controller = new $controllerU();
+			return true;
+		}
+		else
+			return false;
 		
 	}
 
