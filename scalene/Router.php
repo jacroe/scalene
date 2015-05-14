@@ -14,12 +14,14 @@ class Router
 	public function route()
 	{
 		$uri = $this->_parse_request_uri();
+		if ($uri == "/")
+			$uri = $this->default_controller;
 		$uri = explode("/", $uri);
 		$controller = array_splice($uri, 0, 1-count($uri))[0];
 
 		if (empty($controller))
 		{
-			$controller = !is_null($uri[0]) ? $uri[0] : $this->default_controller;
+			$controller = $uri[0];
 			$method = "index";
 			$params = array();
 		}
@@ -39,7 +41,7 @@ class Router
 
 		if ($this->parent->load->controller($controller))
 		{
-			if (!method_exists($this->parent->controller, $method))
+			if (method_exists($this->parent->$controller, $method))
 			{
 				if (call_user_func_array(array($this->parent->$controller, $method), $params) === FALSE)
 					echo "500";
