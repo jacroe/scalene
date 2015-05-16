@@ -4,7 +4,7 @@ if (!function_exists("markdown_parse"))
 {
 	function markdown_parse($text)
 	{
-		return Parsedown::instance()->parse($text);
+		return Parsedown::instance()->text($text);
 	}
 	
 }
