@@ -5,6 +5,9 @@ class Router
 	private $parent;
 	private $default_controller;
 
+	public $REDIRECT_TEMP = 307;
+	public $REDIRECT_PERM = 301;
+
 	public function __construct(&$parent)
 	{
 		$this->parent = $parent;
@@ -54,6 +57,14 @@ class Router
 		else
 			echo "404";
 		
+	}
+
+	public function redirect($route, $status = 307)
+	{
+		if (strpos($route, "http://") === false && strpos($route, "https://") === false)
+			$route = "//".$this->parent->rootpath."$route";
+		header("Location: $route", true, $status);
+		die();
 	}
 
 	/*
