@@ -1,3 +1,6 @@
+scalene/extlib/composer
+scalene/config.php
+
 # Files to ignore because of development
 scalene.sublime-project
 scalene.sublime-workspace
