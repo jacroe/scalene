@@ -2,21 +2,19 @@
 
 class Router
 {
-	private $parent;
 	private $default_controller;
 
 	public $REDIRECT_TEMP = 307;
 	public $REDIRECT_PERM = 301;
 
-	public function __construct(&$parent)
+	public function __construct()
 	{
-		$this->parent = $parent;
-		$this->default_controller = $this->parent->config["default_controller"];
+		$this->default_controller = Scalene::instance()->config["default_controller"];
 	}
 
 	public function route()
 	{
-		$uri = $this->_parse_request_uri();
+		$uri = $this->_parseRequestUri();
 		if ($uri == "/")
 			$uri = $this->default_controller;
 		$uri = explode("/", $uri);
@@ -42,11 +40,11 @@ class Router
 			}
 		}
 
-		if ($this->parent->load->controller($controller))
+		if (Scalene::instance()->load->controller($controller))
 		{
-			if (method_exists($this->parent->$controller, $method))
+			if (method_exists(Scalene::instance()->$controller, $method))
 			{
-				if (call_user_func_array(array($this->parent->$controller, $method), $params) === FALSE)
+				if (call_user_func_array(array(Scalene::instance()->$controller, $method), $params) === FALSE)
 					echo "500";
 			}
 			else
@@ -62,7 +60,7 @@ class Router
 	public function redirect($route, $status = 307)
 	{
 		if (strpos($route, "http://") === false && strpos($route, "https://") === false)
-			$route = "//".$this->parent->rootpath."$route";
+			$route = "//".Scalene::instance()->rootpath."$route";
 		header("Location: $route", true, $status);
 		die();
 	}
@@ -71,7 +69,7 @@ class Router
 		From CodeIgniter's URL class
 		https://github.com/bcit-ci/CodeIgniter/blob/cbf3a559583bcc9055fcee5f7564ca847d0b8dff/system/core/URI.php
 	 */
-	private function _parse_request_uri()
+	private function _parseRequestUri()
 	{
 		if ( ! isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME']))
 		{
@@ -109,10 +107,10 @@ class Router
 			return '/';
 		}
 		// Do some final cleaning of the URI and return it
-		return $this->_remove_relative_directory($uri);
+		return $this->_removeRelativeDirectory($uri);
 	}
 
-	private function _remove_relative_directory($uri)
+	private function _removeRelativeDirectory($uri)
 	{
 		$uris = array();
 		$tok = strtok($uri, '/');

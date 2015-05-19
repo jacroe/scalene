@@ -2,13 +2,6 @@
 
 class Load
 {
-	private $parent;
-
-	public function __construct(&$parent)
-	{
-		$this->parent = $parent;
-	}
-
 	public function core($core)
 	{
 		if (is_array($core))
@@ -22,7 +15,7 @@ class Load
 		if (file_exists(SCALENE_PATH."core/{$coreU}_core.php"))
 		{
 			require_once SCALENE_PATH."core/{$coreU}_core.php";
-			$this->parent->$core = new $coreU();
+			Scalene::instance()->$core = new $coreU();
 			return true;
 		}
 		else
@@ -42,7 +35,7 @@ class Load
 		if (file_exists(SCALENE_PATH."lib/{$libU}_lib.php"))
 		{
 			require_once SCALENE_PATH."lib/{$libU}_lib.php";
-			$this->parent->$lib = new $libU();
+			Scalene::instance()->$lib = new $libU();
 			return true;
 		}
 		else
@@ -56,7 +49,7 @@ class Load
 		if (file_exists(DATA_PATH."controllers/{$controllerU}_controller.php"))
 		{
 			require_once DATA_PATH."controllers/{$controllerU}_controller.php";
-			$this->parent->$controller = new $controllerU();
+			Scalene::instance()->$controller = new $controllerU();
 			return true;
 		}
 		else
@@ -75,7 +68,7 @@ class Load
 		$modelU = ucfirst($model);
 		require_once DATA_PATH."models/{$modelU}_model.php";
 
-		$this->parent->$model = new $modelU();
+		Scalene::instance()->$model = new $modelU();
 	}
 
 	public function helper($helper)

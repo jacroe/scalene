@@ -5,17 +5,15 @@ class View
 	private $smarty;
 	private $parent;
 
-	public function __construct($parent)
+	public function __construct()
 	{
-		$this->parent = $parent;
-
 		$smarty = new Smarty;
 		$smarty->left_delimiter = '{{';
 		$smarty->right_delimiter = '}}';
 		$smarty->setTemplateDir(DATA_PATH."views/");
 		$smarty->setCompileDir(DATA_PATH."views_c/");
 		$smarty->escape_html = true;
-		$smarty->assign("ROOT_PATH", "//".$this->parent->rootpath);
+		$smarty->assign("ROOT_PATH", "//".Scalene::instance()->rootpath);
 
 		$this->smarty = $smarty;
 	}

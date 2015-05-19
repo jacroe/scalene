@@ -1,4 +1,6 @@
 <?php
 require "scalene/Scalene.php";
 
-$_->router->route();
+$app = Scalene::instance();
+$app->build();
+$app->router->route();

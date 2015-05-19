@@ -1,37 +1,17 @@
 <?php
 
-abstract class Controller
+abstract class Base
 {
 	public function __get($key)
 	{
-		return get_scalene()->$key;
+		return Scalene::instance()->$key;
 	}
 }
 
-abstract class Core
-{
-	public function __get($key)
-	{
-		return get_scalene()->$key;
-	}
+abstract class Controller extends Base {}
 
-}
+abstract class Core extends Base {}
 
-abstract class Library
-{
+abstract class Library extends Base {}
 
-	public function __get($key)
-	{
-		return get_scalene()->$key;
-	}
-
-}
-
-abstract class Model
-{
-	public function __get($key)
-	{
-		return get_scalene()->$key;
-	}
-
-}
+abstract class Model extends Base {}
