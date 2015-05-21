@@ -6,6 +6,11 @@ abstract class Base
 	{
 		return Scalene::instance()->$key;
 	}
+
+	public function __call($method, $arguments)
+	{
+		return call_user_func_array(array(Scalene::instance(), $method), $arguments);
+	}
 }
 
 abstract class Controller extends Base {}
