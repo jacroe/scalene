@@ -19,7 +19,7 @@ class Googlelocation extends Library
 
 	private function _lookup($url)
 	{
-		$jsonGeocode = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?address=$url&sensor=false"));
+		$jsonGeocode = json_decode(Requests::get("https://maps.googleapis.com/maps/api/geocode/json?address=$url&sensor=false")->body);
 
 		foreach ($jsonGeocode->results[0]->address_components as $comp)
 		{
@@ -33,7 +33,7 @@ class Googlelocation extends Library
 		$l["latitude"] = $jsonGeocode->results[0]->geometry->location->lat;
 		$l["longitude"] = $jsonGeocode->results[0]->geometry->location->lng;
 
-		$jsonTimezone = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/timezone/json?location={$l["latitude"]},{$l["longitude"]}&sensor=false&timestamp=".time()));
+		$jsonTimezone = json_decode(Requests::get("https://maps.googleapis.com/maps/api/timezone/json?location={$l["latitude"]},{$l["longitude"]}&sensor=false&timestamp=".time())->body);
 
 		$l["timezone"] = $jsonTimezone->timeZoneId;
 

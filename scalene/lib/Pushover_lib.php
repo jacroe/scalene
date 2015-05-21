@@ -12,28 +12,21 @@ class Pushover extends Library
 			$this->{$var} = $value;
 	}
 
-	public function send($title, $message, $url=null, $pri=0)
+	public function send($title, $message, $url = null, $pri = 0)
 	{
 		if ($pri > 1) $pri = 1;
-		curl_setopt_array(
-			$ch = curl_init(),
-			array(
-				CURLOPT_URL => "https://api.pushover.net/1/messages.json",
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_POSTFIELDS => array(
-					"token" => $this->appID,
-					"user" => $this->userID,
-					"title" => $title,
-					"message" => $message,
-					"priority" => $pri,
-					"url" => is_array($url) ? $url["link"] : $url,
-					"url_title" => is_array($url) ? $url["title"] : null,
-				)
-			)
+
+		$data = array(
+			"token" => $this->appID,
+			"user" => $this->userID,
+			"title" => $title,
+			"message" => $message,
+			"priority" => $pri,
+			"url" => is_array($url) ? $url["link"] : $url,
+			"url_title" => is_array($url) ? $url["title"] : null,
 		);
-		$message = curl_exec($ch);
-		curl_close($ch);
-		if (json_decode($message)->status) return true;
-		else return false;
+		$request = Requests::post("https://api.pushover.net/1/messages.json", array(), $data);
+
+		return (bool) json_decode($message)->status;
 	}
 }
