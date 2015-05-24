@@ -44,6 +44,10 @@ class Router
 		{
 			if (method_exists(Scalene::instance()->$controller, $method))
 			{
+				array_walk($params, function(&$value)
+				{
+					$value = urldecode($value);
+				});
 				if (call_user_func_array(array(Scalene::instance()->$controller, $method), $params) === FALSE)
 					echo "500";
 			}
