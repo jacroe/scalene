@@ -27,6 +27,6 @@ class Pushover extends Library
 		);
 		$request = Requests::post("https://api.pushover.net/1/messages.json", array(), $data);
 
-		return (bool) json_decode($message)->status;
+		return (bool) json_decode($request->body)->status;
 	}
 }
