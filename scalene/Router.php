@@ -10,7 +10,7 @@ class Router
 
 	public function __construct()
 	{
-		$this->default_controller = Scalene::instance()->config["default_controller"];
+		$this->default_controller = Scalene::instance()->config["router"]["default_controller"];
 		$this->overrides = Scalene::instance()->config["router"]["override"];
 	}
 
