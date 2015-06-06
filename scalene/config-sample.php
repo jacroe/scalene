@@ -1,6 +1,7 @@
 <?php
 
-$config["default_controller"] = "welcome";
+$config["router"]["default_controller"] = "welcome";
+$config["router"]["override"]["welcome/about"] = "welcome/page/about";
 
 $config["load"]["core"][] = "database";
 $config["load"]["core"][] = "email";

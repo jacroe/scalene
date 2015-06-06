@@ -3,6 +3,7 @@
 class Router
 {
 	private $default_controller;
+	private $overrides;
 
 	public $REDIRECT_TEMP = 307;
 	public $REDIRECT_PERM = 301;
@@ -10,6 +11,7 @@ class Router
 	public function __construct()
 	{
 		$this->default_controller = Scalene::instance()->config["default_controller"];
+		$this->overrides = Scalene::instance()->config["router"]["override"];
 	}
 
 	public function route()
@@ -17,6 +19,8 @@ class Router
 		$uri = $this->_parseRequestUri();
 		if ($uri == "/")
 			$uri = $this->default_controller;
+		elseif (array_key_exists($uri, $this->overrides))
+			$uri = $this->overrides[$uri];
 		$uri = explode("/", $uri);
 		$controller = array_splice($uri, 0, 1-count($uri))[0];
 
