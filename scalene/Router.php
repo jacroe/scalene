@@ -57,11 +57,14 @@ class Router
 			}
 			else
 			{
-				echo "404";
+				Scalene::instance()->$controller->NotFound();
 			}
 		}
 		else
-			echo "404";
+		{
+			Scalene::instance()->load->controller($this->default_controller);
+			Scalene::instance()->{$this->default_controller}->NotFound();
+		}
 		
 	}
 
