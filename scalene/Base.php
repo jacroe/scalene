@@ -13,7 +13,22 @@ abstract class Base
 	}
 }
 
-abstract class Controller extends Base {}
+abstract class Controller extends Base
+{
+	public function BadRequest()
+	{
+		header($_SERVER["SERVER_PROTOCOL"]. " 400 Bad Request");
+	}
+	public function Unauthorized()
+	{
+		header($_SERVER["SERVER_PROTOCOL"]." 401 Unauthorized");
+	}
+
+	public function NotFound()
+	{
+		header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+	}
+}
 
 abstract class Core extends Base {}
 
