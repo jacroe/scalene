@@ -19,7 +19,7 @@ class Router
 		$uri = $this->_parseRequestUri();
 		if ($uri == "/")
 			$uri = $this->default_controller;
-		elseif (isset($this->overrides) && array_key_exists($uri, $this->overrides))
+		elseif (array_key_exists($uri, $this->overrides))
 			$uri = $this->overrides[$uri];
 		$uri = explode("/", $uri);
 		$controller = array_splice($uri, 0, 1-count($uri))[0];
