@@ -5,6 +5,7 @@
 		"swiftmailer/swiftmailer": "~5",
 		"rmccue/requests": ">=1.0",
 		"shark/simple_html_dom": "dev-master",
+		"tedivm/fetch": "0.7.*"
 	},
 	"config": {
 		"vendor-dir": "scalene/extlib/composer"
