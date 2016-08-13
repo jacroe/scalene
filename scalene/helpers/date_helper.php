@@ -19,7 +19,7 @@ if (!function_exists("date_timeAgo"))
 		if ($diff->h == 1) $timeLeft = str_replace("hours", "hour", $timeLeft);
 		if ($diff->i == 1) $timeLeft = str_replace("minutes", "minute", $timeLeft);
 		if ($diff->s == 1) $timeLeft = str_replace("seconds", "second", $timeLeft);
-		if(time() < strtotime($date))
+		if($now < $ref)
 			return $timeLeft." in the future";
 		else
 			return $timeLeft." ago";

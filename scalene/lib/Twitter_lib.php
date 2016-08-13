@@ -2,7 +2,6 @@
 
 class Twitter extends Library
 {
-	private $scalene;
 	private $tw;
 
 	public function __construct()
