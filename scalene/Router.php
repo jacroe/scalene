@@ -44,6 +44,7 @@ class Router
 			}
 		}
 
+		$method .= "_" . strtolower($_SERVER['REQUEST_METHOD']);
 		if (Scalene::instance()->load->controller($controller))
 		{
 			if (method_exists(Scalene::instance()->$controller, $method))
