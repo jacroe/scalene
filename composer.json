@@ -1,11 +1,11 @@
 {
 	"require": {
-		"erusev/parsedown": "1.5.*",
-		"smarty/smarty": "3.1.29",
-		"swiftmailer/swiftmailer": "~5",
-		"rmccue/requests": ">=1.0",
+		"erusev/parsedown": "~1.6",
+		"smarty/smarty": "~3.1",
+		"swiftmailer/swiftmailer": "~6",
+		"rmccue/requests": "~1.7",
 		"shark/simple_html_dom": "dev-master",
-		"tedivm/fetch": "0.7.*"
+		"tedivm/fetch": "~0.7"
 	},
 	"config": {
 		"vendor-dir": "scalene/extlib/composer"

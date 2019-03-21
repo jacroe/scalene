@@ -16,11 +16,11 @@ class Email extends Library
 
 	public function send($toName, $toEmail, $subject, $body, $attachment = null)
 	{
-		$transport = Swift_SmtpTransport::newInstance($this->smtpServer, $this->smtpPort, 'ssl')
+		$transport = (new Swift_SmtpTransport($this->smtpServer, $this->smtpPort, 'ssl'))
 		  ->setUsername($this->smtpUser)
 		  ->setPassword($this->smtpPass);
-		$mailer = Swift_Mailer::newInstance($transport);
-		$message = Swift_Message::newInstance('(no subject)')
+		$mailer = new Swift_Mailer($transport);
+		$message = (new Swift_Message('(no subject)'))
 		  ->setFrom(array($this->smtpFrom["email"] => $this->smtpFrom["name"]))
 		  ->setTo(array($toEmail => $toName))
 		  ->setSubject($subject)
