@@ -1,10 +1,10 @@
 {
 	"require": {
-		"erusev/parsedown": "~1.6",
+		"erusev/parsedown": "~1.7",
 		"smarty/smarty": "~3.1",
 		"swiftmailer/swiftmailer": "~6",
 		"rmccue/requests": "~1.7",
-		"shark/simple_html_dom": "dev-master",
+		"voku/simple_html_dom": "dev-master",
 		"tedivm/fetch": "~0.7"
 	},
 	"config": {
