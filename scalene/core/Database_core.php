@@ -33,7 +33,7 @@ class Database extends Core
 		$stmt = $this->con->prepare($query);
 		$stmt->execute();
 		$row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $row[0]["count"];
+		return (int) $row[0]["count"];
 	}
 
 	public function insert($table, $array)
@@ -44,8 +44,8 @@ class Database extends Core
 		$newKeys = array_keys($newArray);
 
 		$query = "INSERT INTO `$table` ";
-		$query .= '(`'.implode($plainKeys, '`,`').'`) ';
-		$query .= 'VALUES ('.implode($newKeys, ', ').')';
+		$query .= '(`'.implode('`,`', $plainKeys).'`) ';
+		$query .= 'VALUES ('.implode(', ', $newKeys).')';
 
 		$stmt = $this->con->prepare($query);
 		$stmt->execute($newArray);
@@ -61,7 +61,7 @@ class Database extends Core
 		$query = "UPDATE `$table` SET ";
 		foreach ($plainKeys as $k)
 			$fields[] = "`$k`=:$k";
-		$query .= implode($fields, ", ");
+		$query .= implode(", ", $fields);
 		$query .= " WHERE $where";
 
 		$stmt = $this->con->prepare($query);
@@ -97,5 +97,5 @@ class Database extends Core
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
-	
+
 }
