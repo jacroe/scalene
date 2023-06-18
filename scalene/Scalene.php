@@ -4,6 +4,7 @@ define("BASE_PATH", str_replace("scalene/", "", dirname(__FILE__)."/"));
 define("SCALENE_PATH", BASE_PATH."scalene/");
 define("DATA_PATH", BASE_PATH."data/");
 
+#[AllowDynamicProperties]
 class Scalene
 {
 	private static $instance;
@@ -38,7 +39,8 @@ class Scalene
 
 		$this->config = $config;
 		$this->timestart = microtime(true);
-		$this->rootpath = str_replace(basename($_SERVER["SCRIPT_NAME"]), "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
+		if(!defined('STDIN'))
+			$this->rootpath = str_replace(basename($_SERVER["SCRIPT_NAME"]), "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
 	}
 
 	public function build()

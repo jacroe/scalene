@@ -2,7 +2,6 @@
 
 class Pushover extends Library
 {
-	private $scalene;
 	private $appID;
 	private $userID;
 
@@ -24,8 +23,9 @@ class Pushover extends Library
 			"priority" => $pri,
 			"url" => is_array($url) ? $url["link"] : $url,
 			"url_title" => is_array($url) ? $url["title"] : null,
+			"sound" => "classic" // https://pushover.net/api#sound
 		);
-		$request = Requests::post("https://api.pushover.net/1/messages.json", array(), $data);
+		$request = WpOrg\Requests\Requests::post("https://api.pushover.net/1/messages.json", array(), $data);
 
 		return (bool) json_decode($request->body)->status;
 	}

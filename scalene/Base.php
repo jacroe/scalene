@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 abstract class Base
 {
 	public function __get($key)

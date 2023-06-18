@@ -18,6 +18,12 @@ class Load
 			Scalene::instance()->$core = new $coreU();
 			return true;
 		}
+		elseif (file_exists(DATA_PATH."core/{$coreU}_core.php"))
+		{
+			require_once DATA_PATH."core/{$coreU}_core.php";
+			Scalene::instance()->$core = new $coreU();
+			return true;
+		}
 		else
 			return false;
 	}
@@ -45,7 +51,7 @@ class Load
 	public function controller($controller)
 	{
 		$controllerU = ucfirst($controller);
-		
+
 		if (file_exists(DATA_PATH."controllers/{$controllerU}_controller.php"))
 		{
 			require_once DATA_PATH."controllers/{$controllerU}_controller.php";
@@ -54,7 +60,7 @@ class Load
 		}
 		else
 			return false;
-		
+
 	}
 
 	public function model($model)
@@ -73,6 +79,12 @@ class Load
 
 	public function helper($helper)
 	{
+		if (is_array($helper))
+		{
+			foreach($helper as $h)
+				$this->helper($h);
+			return;
+		}
 		require_once SCALENE_PATH."helpers/{$helper}_helper.php";
 	}
 
