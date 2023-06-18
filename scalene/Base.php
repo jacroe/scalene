@@ -16,6 +16,10 @@ abstract class Base
 
 abstract class Controller extends Base
 {
+	public function NoContent()
+	{
+		header($_SERVER["SERVER_PROTOCOL"]. " 204 No Content");
+	}
 	public function BadRequest()
 	{
 		header($_SERVER["SERVER_PROTOCOL"]. " 400 Bad Request");
@@ -28,6 +32,10 @@ abstract class Controller extends Base
 	public function NotFound()
 	{
 		header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+	}
+	public function ResponseIsJSON()
+	{
+		header('Content-type:application/json;charset=utf-8');
 	}
 }
 

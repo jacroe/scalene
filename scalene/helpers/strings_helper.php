@@ -50,3 +50,17 @@ if (!function_exists("oxford_comma"))
 		return implode(', ', $array);
 	}
 }
+
+# https://www.php.net/manual/en/function.nl2br.php#73440
+if (!function_exists("nl2br_replace"))
+{
+	function nl2br_replace($str, $use_xhtml = true)
+	{
+		if ($use_xhtml)
+			$replacement = "<br />";
+		else
+			$replacement = "<br>";
+
+		return str_replace(array("\r\n", "\r", "\n"), $replacement, $str);
+	}
+}

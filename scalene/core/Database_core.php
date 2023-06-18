@@ -11,7 +11,7 @@ class Database extends Core
 
 		try
 		{
-			$this->con = new PDO("mysql:host=$server;dbname=$database;charset=utf8", $user, $pass);
+			$this->con = new PDO("mysql:host=$server;dbname=$database;charset=utf8mb4", $user, $pass);
 		}
 		catch(PDOException $e)
 		{
