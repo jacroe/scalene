@@ -27,3 +27,5 @@ $config["twitter"]["consumer_secret"] = "";
 
 $config["users"]["dbtable"] = "users";	// Database table used by core/Users_core.php. Expects a structure of at 
 										// least: (username, email, password)
+
+$config["googlelocation"]["googlekey"] = "";
