@@ -37,9 +37,8 @@ class Scalene
 		require SCALENE_PATH."Base.php";
 		require SCALENE_PATH."Router.php";
 
-		$this->config = $config;
 		$this->timestart = microtime(true);
-		if(!defined('STDIN'))
+		if(!is_cli())
 			$this->rootpath = str_replace(basename($_SERVER["SCRIPT_NAME"]), "", $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]);
 	}
 
@@ -60,4 +59,19 @@ class Scalene
 		return microtime(true)-$this->timestart;
 	}
 
+}
+
+function is_cli()
+{
+	if( defined('STDIN') )
+	{
+		return true;
+	}
+
+	if( empty($_SERVER['REMOTE_ADDR']) and !isset($_SERVER['HTTP_USER_AGENT']) and count($_SERVER['argv']) > 0)
+	{
+		return true;
+	}
+
+	return false;
 }
