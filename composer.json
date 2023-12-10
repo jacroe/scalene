@@ -2,10 +2,10 @@
 	"require": {
 		"erusev/parsedown": "~1.7",
 		"smarty/smarty": "~3.1",
-		"swiftmailer/swiftmailer": "~6",
 		"rmccue/requests": "~2.0",
 		"voku/simple_html_dom": "~4.8.0",
-		"tedivm/fetch": "~0.7"
+		"tedivm/fetch": "~0.7",
+		"symfony/mailer": "^7.0"
 	},
 	"config": {
 		"vendor-dir": "scalene/extlib/composer"

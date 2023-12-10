@@ -16,16 +16,18 @@ class Email extends Library
 
 	public function send($toName, $toEmail, $subject, $body, $attachment = null)
 	{
-		$transport = (new Swift_SmtpTransport($this->smtpServer, $this->smtpPort, 'ssl'))
-		  ->setUsername($this->smtpUser)
-		  ->setPassword($this->smtpPass);
-		$mailer = new Swift_Mailer($transport);
-		$message = (new Swift_Message('(no subject)'))
-		  ->setFrom(array($this->smtpFrom["email"] => $this->smtpFrom["name"]))
-		  ->setTo(array($toEmail => $toName))
-		  ->setSubject($subject)
-		  ->setBody($body, 'text/html');
-		if ($attachment) $message->attach(Swift_Attachment::fromPath($attachment));
-		$result = $mailer->send($message);
+		$dsn = "smtp://".
+			urlencode($this->smtpUser).":".urlencode($this->smtpPass).
+			"@".$this->smtpServer.":".$this->smtpPort;
+		$transport = Symfony\Component\Mailer\Transport::fromDsn($dsn);
+		// $mailer = new Symfony\Component\Mailer\Mailer($transport);
+
+		$email = (new Symfony\Component\Mime\Email())
+			->from(new Symfony\Component\Mime\Address($this->smtpFrom["email"], $this->smtpFrom["name"]))
+			->to(new Symfony\Component\Mime\Address($toEmail, $toName))
+			->subject($subject)
+			->html($body);
+		if ($attachment) $email->addPart(new Symfony\Component\Mime\Part\DataPart(fopen($attachment, 'r')));
+		return $transport->send($email);
 	}
 }
