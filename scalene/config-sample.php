@@ -20,11 +20,6 @@ $config["email"]["from"] = array("email"=>"tim@example.com", "name"=>"Tim BL"); 
 $config["pushover"]["appID"] = "";	// Pushover api app ID
 $config["pushover"]["userID"] = "";	// Pushover user ID
 
-$config["twitter"]["oauth_access_token"] = "";			// These are self-explanatory
-$config["twitter"]["oauth_access_token_secret"] = "";
-$config["twitter"]["consumer_key"] = "";
-$config["twitter"]["consumer_secret"] = "";
-
 $config["users"]["dbtable"] = "users";	// Database table used by core/Users_core.php. Expects a structure of at 
 										// least: (username, email, password)
 
