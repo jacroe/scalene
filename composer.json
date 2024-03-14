@@ -1,7 +1,7 @@
 {
 	"require": {
 		"erusev/parsedown": "~1.7",
-		"smarty/smarty": "~3.1",
+		"smarty/smarty": "^4.2.1",
 		"rmccue/requests": "~2.0",
 		"voku/simple_html_dom": "~4.8.0",
 		"tedivm/fetch": "~0.7",
